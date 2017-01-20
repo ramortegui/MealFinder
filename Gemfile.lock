@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    MealFinder (1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (2.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  MealFinder!
+  json
+
+BUNDLED WITH
+   1.10.3
