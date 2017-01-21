@@ -1,4 +1,8 @@
-require "./lib/MealFinder.rb"
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require "restaurant.rb"
+require "menu.rb"
+require "order_menu.rb"
+require "MealFinder.rb"
 require 'minitest/autorun'
 
 

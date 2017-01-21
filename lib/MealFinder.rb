@@ -1,7 +1,5 @@
 class MealFinder
-  attr_accessor :restaurants
   require 'set'
-
   def initialize()
     @restaurants = SortedSet.new
   end
@@ -31,54 +29,5 @@ class MealFinder
       end
     end
     result
-  end
-end
-
-class Restaurant
-  attr_reader :name,:rating,:meals_qty, :menus
-
-  include Comparable
-
-  def initialize(name, rating, meals_qty)
-    @name = name
-    @rating = rating
-    @menus = Hash.new
-    @menus["other"] = Menu.new("other", meals_qty)
-
-  end
-
-  def addMenu(menu)
-    @menus[menu.name] = menu
-    @menus["other"].remove_qty(menu.quantity)
-  end
-
-  def <=>( other)
-   @rating <=> other.rating
-  end
-
-end
-
-class Menu
-  attr_reader :name, :quantity
-  def initialize(name, quantity)
-    @name = name
-    @quantity = quantity
-  end
-
-  def remove_qty(quantity)
-    @quantity -= quantity
-  end
-end
-
-class OrderMenu
-  attr_reader :menus
-  def initialize(quantity)
-    @menus = {}
-    @menus["other"] = Menu.new("other", quantity)
-  end
-
-  def addMenu(menu)
-    @menus[menu.name] = menu
-    @menus["other"].remove_qty(menu.quantity)
   end
 end
