@@ -4,8 +4,9 @@ require 'minitest/autorun'
 
 class TestMealFinder < MiniTest::Unit::TestCase
 
-  def test_sample
-    assert_equal(0, -)
+  def test_load_meal_finder
+    m = MealFinder.new
+    assert_equal(MealFinder,m.class)
   end
   
 end
