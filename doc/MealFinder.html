@@ -198,7 +198,7 @@ method receive  an <a href="Restaurant.html">Restaurant</a> Object</p>
         
         <div class="method-heading">
           <span class="method-name">finder</span><span
-            class="method-args">(order_menu)</span>
+            class="method-args">(order_meal)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -208,35 +208,36 @@ method receive  an <a href="Restaurant.html">Restaurant</a> Object</p>
         <div class="method-description">
           
           <p>The <a href="MealFinder.html#method-i-finder">#finder</a> method, receive
-an <a href="OrderMenu.html">OrderMenu</a> object and scann the  restaurants
+an <a href="OrderMeal.html">OrderMeal</a> object and scann the  restaurants
 ordered by rating.  It returns a Hash object with the restaurants and the
-menus delivered in order to complete the <a
-href="OrderMenu.html">OrderMenu</a> requirement.</p>
+meals delivered in order to complete the <a
+href="OrderMeal.html">OrderMeal</a> requirement.</p>
           
           
 
           
           <div class="method-source-code" id="finder-source">
             <pre><span class="ruby-comment"># File lib/MealFinder.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">finder</span>(<span class="ruby-identifier">order_menu</span>)
-  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">menus</span> = <span class="ruby-identifier">order_menu</span>.<span class="ruby-identifier">menus</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finder</span>(<span class="ruby-identifier">order_meal</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> 
+  <span class="ruby-identifier">meals</span> = <span class="ruby-identifier">order_meal</span>.<span class="ruby-identifier">meals</span>
   <span class="ruby-ivar">@restaurants</span>.<span class="ruby-identifier">reverse_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">restaurant</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">restaurant_temp</span> = <span class="ruby-identifier">restaurant</span>
-    <span class="ruby-identifier">menus</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> )
-        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> ) 
-          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>] = {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>]
-          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>][<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>
-          <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>)
+    <span class="ruby-identifier">meals</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> )
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span> ) 
+          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>]
+          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>][<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>
+          <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>)
         <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>] = {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>]
-          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>][<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>
-          <span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">menus</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>)
+          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>]
+          <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">name</span>][<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>
+          <span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">restaurant_temp</span>.<span class="ruby-identifier">meals</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">quantity</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">result</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -270,13 +271,13 @@ data.</p>
 
           
           <div class="method-source-code" id="print_result-source">
-            <pre><span class="ruby-comment"># File lib/MealFinder.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/MealFinder.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">print_result</span>(<span class="ruby-identifier">result</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;The result of the meal finder is: &quot;</span>
   <span class="ruby-identifier">result</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">restaurant</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Restaurant: #{restaurant}&quot;</span>
-    <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant</span>].<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">menu</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t #{menu} #{result[restaurant][menu]}&quot;</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-identifier">restaurant</span>].<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">meal</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t #{meal} #{result[restaurant][meal]}&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span>
@@ -309,7 +310,7 @@ restaurants and the order.</p>
 
 <p>The method parse the json file, and fill the restaurants of the <a
 href="MealFinder.html">MealFinder</a>.  Also,  creates the <a
-href="OrderMenu.html">OrderMenu</a>, and process the file.</p>
+href="OrderMeal.html">OrderMeal</a>, and process the file.</p>
 
 <p>The result in case of success is a hash with the result of the <a
 href="MealFinder.html#method-i-finder">#finder</a> method.</p>
@@ -318,7 +319,7 @@ href="MealFinder.html#method-i-finder">#finder</a> method.</p>
 
           
           <div class="method-source-code" id="process_file-source">
-            <pre><span class="ruby-comment"># File lib/MealFinder.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/MealFinder.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_file</span>(<span class="ruby-identifier">filename</span>)
   <span class="ruby-identifier">structure</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">begin</span>
@@ -336,7 +337,7 @@ href="MealFinder.html#method-i-finder">#finder</a> method.</p>
             <span class="ruby-identifier">specials</span> = <span class="ruby-identifier">r_data</span>[<span class="ruby-string">&quot;specials&quot;</span>]
             <span class="ruby-identifier">specials</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">special</span><span class="ruby-operator">|</span>
               <span class="ruby-identifier">special</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">addMenu</span>(<span class="ruby-constant">Menu</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">key</span>, <span class="ruby-identifier">special</span>[<span class="ruby-identifier">key</span>] ))
+                <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">addMeal</span>(<span class="ruby-constant">Meal</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">key</span>, <span class="ruby-identifier">special</span>[<span class="ruby-identifier">key</span>] ))
               <span class="ruby-keyword">end</span>
             <span class="ruby-keyword">end</span>
           <span class="ruby-keyword">end</span>
@@ -348,16 +349,16 @@ href="MealFinder.html#method-i-finder">#finder</a> method.</p>
       <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">if</span>( <span class="ruby-identifier">structure</span>[<span class="ruby-string">&quot;order&quot;</span>] )
         <span class="ruby-keyword">if</span>( <span class="ruby-identifier">structure</span>[<span class="ruby-string">&quot;order&quot;</span>][<span class="ruby-string">&quot;quantity&quot;</span>] )
-          <span class="ruby-identifier">order_menu</span> = <span class="ruby-constant">OrderMenu</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">structure</span>[<span class="ruby-string">&quot;order&quot;</span>][<span class="ruby-string">&quot;quantity&quot;</span>])
+          <span class="ruby-identifier">order_meal</span> = <span class="ruby-constant">OrderMeal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">structure</span>[<span class="ruby-string">&quot;order&quot;</span>][<span class="ruby-string">&quot;quantity&quot;</span>])
           <span class="ruby-identifier">specials</span> = <span class="ruby-identifier">structure</span>[<span class="ruby-string">&quot;order&quot;</span>][<span class="ruby-string">&quot;specials&quot;</span>]
           <span class="ruby-keyword">if</span>( <span class="ruby-identifier">specials</span> )
             <span class="ruby-identifier">specials</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">special</span><span class="ruby-operator">|</span>
               <span class="ruby-identifier">special</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">order_menu</span>.<span class="ruby-identifier">addMenu</span>(<span class="ruby-constant">Menu</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">key</span>, <span class="ruby-identifier">special</span>[<span class="ruby-identifier">key</span>]))
+                <span class="ruby-identifier">order_meal</span>.<span class="ruby-identifier">addMeal</span>(<span class="ruby-constant">Meal</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">key</span>, <span class="ruby-identifier">special</span>[<span class="ruby-identifier">key</span>]))
               <span class="ruby-keyword">end</span>
             <span class="ruby-keyword">end</span>
           <span class="ruby-keyword">end</span>
-          <span class="ruby-identifier">finder</span>(<span class="ruby-identifier">order_menu</span>)
+          <span class="ruby-keyword">return</span> <span class="ruby-identifier">finder</span>(<span class="ruby-identifier">order_meal</span>)
         <span class="ruby-keyword">else</span>
           <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;No quantity defined for order.&quot;</span>
         <span class="ruby-keyword">end</span>

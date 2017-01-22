@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Menu - RDoc Documentation</title>
+<title>class OrderMeal - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -72,7 +72,7 @@
     
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-remove_qty">#remove_qty</a>
+    <li ><a href="#method-i-addMeal">#addMeal</a>
     
   </ul>
 </div>
@@ -80,15 +80,14 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Menu">
-  <h1 id="class-Menu" class="class">
-    class Menu
+<main role="main" aria-labelledby="class-OrderMeal">
+  <h1 id="class-OrderMeal" class="class">
+    class OrderMeal
   </h1>
 
   <section class="description">
     
-<p>Represent a meal offered by a <a href="Restaurant.html">Restaurant</a>, and
-required by <a href="OrderMenu.html">OrderMenu</a>.</p>
+<p>Represent the requested meals</p>
 
   </section>
 
@@ -109,28 +108,15 @@ required by <a href="OrderMenu.html">OrderMenu</a>.</p>
       </header>
 
       
-      <div id="attribute-i-name" class="method-detail">
+      <div id="attribute-i-meals" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">name</span><span
+          <span class="method-name">meals</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
         
-        <p>Name of the <a href="Menu.html">Menu</a></p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-quantity" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">quantity</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Avaiable/Required quantities</p>
+        <p>Hash representing <a href="Meal.html">Meal</a> objects by name</p>
         
         </div>
       </div>
@@ -149,7 +135,7 @@ required by <a href="OrderMenu.html">OrderMenu</a>.</p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(name, quantity)</span>
+            class="method-args">(quantity)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -158,16 +144,16 @@ required by <a href="OrderMenu.html">OrderMenu</a>.</p>
 
         <div class="method-description">
           
-          <p>Receive two string defining the name and the quantity.</p>
+          
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/menu.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">quantity</span>)
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
-  <span class="ruby-ivar">@quantity</span> = <span class="ruby-identifier">quantity</span>
+            <pre><span class="ruby-comment"># File lib/order_meal.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">quantity</span>)
+  <span class="ruby-ivar">@meals</span> = {}
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-string">&quot;other&quot;</span>] = <span class="ruby-constant">Meal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;other&quot;</span>, <span class="ruby-identifier">quantity</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -187,11 +173,11 @@ required by <a href="OrderMenu.html">OrderMenu</a>.</p>
        </header>
 
     
-      <div id="method-i-remove_qty" class="method-detail ">
+      <div id="method-i-addMeal" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">remove_qty</span><span
-            class="method-args">(quantity)</span>
+          <span class="method-name">addMeal</span><span
+            class="method-args">(meal)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -200,15 +186,16 @@ required by <a href="OrderMenu.html">OrderMenu</a>.</p>
 
         <div class="method-description">
           
-          <p>Remove a quanitty.</p>
+          <p>Add meal to the order</p>
           
           
 
           
-          <div class="method-source-code" id="remove_qty-source">
-            <pre><span class="ruby-comment"># File lib/menu.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">quantity</span>)
-  <span class="ruby-ivar">@quantity</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">quantity</span>
+          <div class="method-source-code" id="addMeal-source">
+            <pre><span class="ruby-comment"># File lib/order_meal.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addMeal</span>(<span class="ruby-identifier">meal</span>)
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-identifier">meal</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">meal</span>
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-string">&quot;other&quot;</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">meal</span>.<span class="ruby-identifier">quantity</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

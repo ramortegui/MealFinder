@@ -85,7 +85,7 @@
     
     <li ><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
     
-    <li ><a href="#method-i-addMenu">#addMenu</a>
+    <li ><a href="#method-i-addMeal">#addMeal</a>
     
   </ul>
 </div>
@@ -121,6 +121,19 @@
       </header>
 
       
+      <div id="attribute-i-meals" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">meals</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Total of meals</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-meals_qty" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">meals_qty</span><span
@@ -129,20 +142,7 @@
 
         <div class="method-description">
         
-        <p>Total of menus available on the restaurant</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-menus" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">menus</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Total of menus</p>
+        <p>Total of meals available on the restaurant</p>
         
         </div>
       </div>
@@ -198,7 +198,7 @@
           
           <p>Receive the name, rating, and the quantity of meals.</p>
 
-<p>By default all the meas will be added as “other”</p>
+<p>By default all the meals will be added as “other”</p>
           
           
 
@@ -208,8 +208,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rating</span>, <span class="ruby-identifier">meals_qty</span>)
   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@rating</span> = <span class="ruby-identifier">rating</span>
-  <span class="ruby-ivar">@menus</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@menus</span>[<span class="ruby-string">&quot;other&quot;</span>] = <span class="ruby-constant">Menu</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;other&quot;</span>, <span class="ruby-identifier">meals_qty</span>)
+  <span class="ruby-ivar">@meals</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-string">&quot;other&quot;</span>] = <span class="ruby-constant">Meal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;other&quot;</span>, <span class="ruby-identifier">meals_qty</span>)
 
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -264,11 +264,11 @@ Restaurants by rating.</p>
       </div>
 
     
-      <div id="method-i-addMenu" class="method-detail ">
+      <div id="method-i-addMeal" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">addMenu</span><span
-            class="method-args">(menu)</span>
+          <span class="method-name">addMeal</span><span
+            class="method-args">(meal)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -277,17 +277,17 @@ Restaurants by rating.</p>
 
         <div class="method-description">
           
-          <p>Add <a href="Menu.html">Menu</a> to the restaurant.  The quantity will be 
-substracted of the total menus.</p>
+          <p>Add <a href="Meal.html">Meal</a> to the restaurant.  The quantity will be 
+substracted of the total meals.</p>
           
           
 
           
-          <div class="method-source-code" id="addMenu-source">
+          <div class="method-source-code" id="addMeal-source">
             <pre><span class="ruby-comment"># File lib/restaurant.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">addMenu</span>(<span class="ruby-identifier">menu</span>)
-  <span class="ruby-ivar">@menus</span>[<span class="ruby-identifier">menu</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">menu</span>
-  <span class="ruby-ivar">@menus</span>[<span class="ruby-string">&quot;other&quot;</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">menu</span>.<span class="ruby-identifier">quantity</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addMeal</span>(<span class="ruby-identifier">meal</span>)
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-identifier">meal</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">meal</span>
+  <span class="ruby-ivar">@meals</span>[<span class="ruby-string">&quot;other&quot;</span>].<span class="ruby-identifier">remove_qty</span>(<span class="ruby-identifier">meal</span>.<span class="ruby-identifier">quantity</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

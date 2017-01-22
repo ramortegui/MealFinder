@@ -20,29 +20,30 @@ class MealFinder
   end
 
   ##
-  # The MealFinder.finder method, receive an OrderMenu object and scann the 
+  # The MealFinder.finder method, receive an OrderMeal object and scann the 
   # restaurants ordered by rating.  It returns a Hash object with
-  # the restaurants and the menus delivered in order to complete
-  # the OrderMenu requirement.
-  def finder(order_menu)
-    result = Hash.new
-    menus = order_menu.menus
+  # the restaurants and the meals delivered in order to complete
+  # the OrderMeal requirement.
+  def finder(order_meal)
+    result = Hash.new 
+    meals = order_meal.meals
     @restaurants.reverse_each do |restaurant|
       restaurant_temp = restaurant
-      menus.keys.each do |name|
-        if ( restaurant.menus[name] && restaurant_temp.menus[name].quantity > 0 )
-          if ( menus[name].quantity <= restaurant_temp.menus[name].quantity ) 
-            result[restaurant_temp.name] = {} unless result[restaurant_temp.name]
-            result[restaurant_temp.name][name] = menus[name].quantity
-            restaurant_temp.menus[name].remove_qty(menus[name].quantity)
+      meals.keys.each do |name|
+        if ( restaurant.meals[name] && restaurant_temp.meals[name].quantity > 0 )
+          if ( meals[name].quantity <= restaurant_temp.meals[name].quantity ) 
+            result[restaurant_temp.name] = Hash.new unless result[restaurant_temp.name]
+            result[restaurant_temp.name][name] = meals[name].quantity
+            restaurant_temp.meals[name].remove_qty(meals[name].quantity)
           else
-            result[restaurant_temp.name] = {} unless result[restaurant_temp.name]
-            result[restaurant_temp.name][name] = restaurant_temp.menus[name].quantity
-            menus[name].remove_qty(restaurant_temp.menus[name].quantity)
+            result[restaurant_temp.name] = Hash.new unless result[restaurant_temp.name]
+            result[restaurant_temp.name][name] = restaurant_temp.meals[name].quantity
+            meals[name].remove_qty(restaurant_temp.meals[name].quantity)
           end
         end
       end
     end
+
     result
   end
 
@@ -51,7 +52,7 @@ class MealFinder
   #  and the order.
   #
   #  The method parse the json file, and fill the restaurants of the MealFinder.  Also, 
-  #  creates the OrderMenu, and process the file.
+  #  creates the OrderMeal, and process the file.
   #
   #  The result in case of success is a hash with the result of the MealFinder.finder method.
   def process_file(filename)
@@ -71,7 +72,7 @@ class MealFinder
               specials = r_data["specials"]
               specials.each do |special|
                 special.keys.each do |key|
-                  restaurant.addMenu(Menu.new( key, special[key] ))
+                  restaurant.addMeal(Meal.new( key, special[key] ))
                 end
               end
             end
@@ -83,16 +84,16 @@ class MealFinder
         end
         if( structure["order"] )
           if( structure["order"]["quantity"] )
-            order_menu = OrderMenu.new(structure["order"]["quantity"])
+            order_meal = OrderMeal.new(structure["order"]["quantity"])
             specials = structure["order"]["specials"]
             if( specials )
               specials.each do |special|
                 special.keys.each do |key|
-                  order_menu.addMenu(Menu.new( key, special[key]))
+                  order_meal.addMeal(Meal.new( key, special[key]))
                 end
               end
             end
-            finder(order_menu)
+            return finder(order_meal)
           else
             print "No quantity defined for order."
           end
@@ -114,8 +115,8 @@ class MealFinder
     puts "The result of the meal finder is: "
     result.keys.each do |restaurant|
       puts "Restaurant: #{restaurant}"
-      result[restaurant].keys.each do |menu|
-        puts "\t #{menu} #{result[restaurant][menu]}"
+      result[restaurant].keys.each do |meal|
+        puts "\t #{meal} #{result[restaurant][meal]}"
       end
     end
     return

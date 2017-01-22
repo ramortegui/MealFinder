@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require "restaurant.rb"
-require "menu.rb"
-require "order_menu.rb"
+require "meal.rb"
+require "order_meal.rb"
 require "MealFinder.rb"
 require 'minitest/autorun'
 
@@ -17,17 +17,17 @@ class TestMealFinder < MiniTest::Unit::TestCase
     m = MealFinder.new
     
     r = Restaurant.new("A",5,40)
-    r.addMenu(Menu.new("vegetarians",4))
+    r.addMeal(Meal.new("vegetarians",4))
     m.addRestaurant(r)
 
     r = Restaurant.new("B",3,100)
-    r.addMenu(Menu.new("vegetarians",20))
-    r.addMenu(Menu.new("gluten free",20))
+    r.addMeal(Meal.new("vegetarians",20))
+    r.addMeal(Meal.new("gluten free",20))
     m.addRestaurant(r)
 
-    om = OrderMenu.new(50)
-    om.addMenu(Menu.new("vegetarians",5))
-    om.addMenu(Menu.new("gluten free",7))
+    om = OrderMeal.new(50)
+    om.addMeal(Meal.new("vegetarians",5))
+    om.addMeal(Meal.new("gluten free",7))
 
     res =  m.finder(om)
 

@@ -50,20 +50,20 @@ Run console
 
     #Create and add a new restaurant
     r = Restaurant.new("A",5,40)
-    r.addMenu(Menu.new("vegetarians",4))
+    r.addMeal(Meal.new("vegetarians",4))
     m.addRestaurant(r)
 
     #Create and add a new restaurant
     r = Restaurant.new("B",3,100)
-    r.addMenu(Menu.new("vegetarians",20))
-    r.addMenu(Menu.new("gluten free",20))
+    r.addMeal(Meal.new("vegetarians",20))
+    r.addMeal(Meal.new("gluten free",20))
     m.addRestaurant(r)
 
     #Create an order
-    om = OrderMenu.new(50)
+    om = OrderMeal.new(50)
     #Add special meals to the order
-    om.addMenu(Menu.new("vegetarians",5))
-    om.addMenu(Menu.new("gluten free",7))
+    om.addMeal(Meal.new("vegetarians",5))
+    om.addMeal(Meal.new("gluten free",7))
 
     #Get the result
     res =  m.finder(om)

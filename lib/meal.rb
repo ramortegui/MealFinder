@@ -1,7 +1,7 @@
 ##
-# Represent a meal offered by a Restaurant, and required by OrderMenu.
-class Menu
-  ## Name of the Menu
+# Represent a meal offered by a Restaurant, and required by OrderMeal.
+class Meal
+  ## Name of the Meal 
   attr_reader :name
 
   ## Avaiable/Required quantities
