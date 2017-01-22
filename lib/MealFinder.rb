@@ -1,5 +1,6 @@
 class MealFinder
   require 'set'
+  require 'json'
   def initialize()
     @restaurants = SortedSet.new
   end
@@ -30,4 +31,58 @@ class MealFinder
     end
     result
   end
+
+  def process_file(filename)
+    structure = nil
+    begin
+      structure = JSON.parse( IO.read(filename, encoding:'utf-8') )
+    rescue
+        print "Error loading/parsing File: #{$!}"
+        return nil
+    end
+    begin
+      if( structure["restaurants"].count > 0 )
+        structure["restaurants"].each do |r_data|
+          if( r_data["name"] && r_data["rating"] && r_data["meals_qty"] )
+            restaurant = Restaurant.new(r_data["name"],r_data["rating"],r_data["meals_qty"])
+            if( r_data["specials"] )
+              specials = r_data["specials"]
+              specials.each do |special|
+                special.keys.each do |key|
+                  restaurant.addMenu(Menu.new( key, special[key] ))
+                end
+              end
+            end
+            addRestaurant(restaurant)
+          else
+            print "Restaurant #{r_data} doesn't have minimum data"
+            return
+          end
+        end
+        if( structure["order"] )
+          if( structure["order"]["quantity"] )
+            order_menu = OrderMenu.new(structure["order"]["quantity"])
+            specials = structure["order"]["specials"]
+            if( specials )
+              specials.each do |special|
+                special.keys.each do |key|
+                  order_menu.addMenu(Menu.new( key, special[key]))
+                end
+              end
+            end
+            finder(order_menu)
+          else
+            print "No quantity defined for order."
+          end
+        end
+      else
+        print "No restaurantsi defined";
+        return
+      end
+    rescue
+      print "Error trying to load structure on #{$!}"
+    end
+
+  end
+
 end

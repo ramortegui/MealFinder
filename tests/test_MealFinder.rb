@@ -39,4 +39,36 @@ class TestMealFinder < MiniTest::Unit::TestCase
     assert_equal(res["B"]["other"],2)
   end
 
+  def test_process_file
+    m = MealFinder.new
+    res = m.process_file("tests/data/problem.js")
+    
+    assert_equal(res["A"]["vegetarians"],4)
+    assert_equal(res["A"]["other"],36)
+
+    assert_equal(res["B"]["vegetarians"],1)
+    assert_equal(res["B"]["gluten free"],7)
+    assert_equal(res["B"]["other"],2)
+  end
+
+  def test_process_file_restaurants_unordered
+    m = MealFinder.new
+    res = m.process_file("tests/data/problem_unordered.js")
+    
+    assert_equal(res["A"]["vegetarians"],4)
+    assert_equal(res["A"]["other"],36)
+
+    assert_equal(res["B"]["vegetarians"],1)
+    assert_equal(res["B"]["gluten free"],7)
+    assert_equal(res["B"]["other"],2)
+  end
+
+  def test_process_file_no_exists
+    m = MealFinder.new
+
+    res = m.process_file("tests/data/no-exists.js")
+
+    assert_equal(res, nil)
+  end
+
 end
