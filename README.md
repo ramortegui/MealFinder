@@ -42,7 +42,7 @@ Run console
 
     $>./bin/console
 
-### Using the structure (on the console)
+### Using the structure (console)
 
     #Create a new meal finder
     m = MealFinder.new
@@ -104,7 +104,7 @@ The Module support json file definitions as:
   }
 }
 ```
-#### Processing the file (on the console)
+#### Processing the file (console)
 
     #Create a MealFinder
     m = MealFinder.new
