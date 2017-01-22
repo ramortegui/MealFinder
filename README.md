@@ -20,7 +20,7 @@ Expected meal orders: Restaurant A (4 vegetarian + 36 others), Restaurant B (1 v
 - The rating of each restaurant is an integer.
 - The total meals of the restaurants are enough to satisfy the team's order.
 
-## How to run
+## How to use
 
 clone the repository.
 
@@ -30,7 +30,8 @@ Change the directory
 
     $>cd MealFinder
 
-Install the dependencies
+Install the dependencies. To run this script you need to have installed ruby, and the gem 'bundle'.
+If not, please refers to https://rvm.io/rvm/install.
 
     $>./bin/setup
 
@@ -84,7 +85,7 @@ Run console
 
 ### Processing a file
 
-The Module support json file definitions as:
+The Module supports json file definitions as:
 
 #### Sample of data structure defined on: ./tests/data/problem.js
 ```

@@ -1,17 +1,31 @@
+##
+# This class represents a MealFinder program
 class MealFinder
   require 'set'
   require 'json'
+
+  ##
+  # Creates a new MealFinder with empty restaurants.
+  # The restaurants attribute is SortedSet object that will
+  # be filled by the MealFinder.addRestaurant method.
   def initialize()
     @restaurants = SortedSet.new
   end
 
+  ##
+  # Add a restaurant to the MealFinder.  This method receive 
+  # an Restaurant Object
   def addRestaurant(restaurant)
     @restaurants << restaurant
   end
 
-  #receive a hash with the requirements
+  ##
+  # The MealFinder.finder method, receive an OrderMenu object and scann the 
+  # restaurants ordered by rating.  It returns a Hash object with
+  # the restaurants and the menus delivered in order to complete
+  # the OrderMenu requirement.
   def finder(order_menu)
-    result = {}
+    result = Hash.new
     menus = order_menu.menus
     @restaurants.reverse_each do |restaurant|
       restaurant_temp = restaurant
@@ -32,6 +46,14 @@ class MealFinder
     result
   end
 
+  ##
+  #  Receive the route of a file containing a valid json definition of the restaurants
+  #  and the order.
+  #
+  #  The method parse the json file, and fill the restaurants of the MealFinder.  Also, 
+  #  creates the OrderMenu, and process the file.
+  #
+  #  The result in case of success is a hash with the result of the MealFinder.finder method.
   def process_file(filename)
     structure = nil
     begin
@@ -82,9 +104,12 @@ class MealFinder
     rescue
       print "Error trying to load structure on #{$!}"
     end
-
+    return
   end
 
+  ##
+  # Receives a Hash with the result of the MealFinder.finder method and prints their
+  # data.
   def print_result(result)
     puts "The result of the meal finder is: "
     result.keys.each do |restaurant|
