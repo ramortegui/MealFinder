@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Meal finder excercise}
   spec.description   = %q{This exercise is a sample of an object oriented design for a problem.}
   spec.license       = "MIT"
-
-  spec.files         = ['lib/MealFinder.rb']
+  spec.files         = ['lib/MealFinder.rb','lib/restaurant.rb','lib/meal.rb','lib/order_meal.rb']
   spec.test_files    = ['tests/test_MealFinder.rb']
   spec.require_paths = ["lib"]
+  spec.homepage      = 'https://github.com/ramortegui/MealFinder'
 end
