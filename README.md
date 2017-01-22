@@ -12,12 +12,15 @@ Restaurants: Restaurant A has a rating of 5/5 and can serve 40 meals including 4
 
 Restaurant B has a rating of 3/5 and can serve 100 meals including 20 vegetarians, and 20 gluten free.
 
+Expected meal orders: Restaurant A (4 vegetarian + 36 others), Restaurant B (1 vegetarian + 7 gluten free + 2 others)
+
 ## Asumptions
 
+- The user has ruby installed
 - The rating of each restaurant is an integer.
-- The restaurants has enought meals in order to satisfy the team needs.
+- The total meals of the restaurants are enough to satisfy the team's order.
 
-## Use
+## How to run
 
 clone the repository.
 
@@ -39,3 +42,73 @@ Run console
 
     $>./bin/console
 
+### Using the structure (on the console)
+
+    #Create a new meal finder
+    m = MealFinder.new
+    
+    #Create and add a new restaurant
+    r = Restaurant.new("A",5,40)
+    r.addMenu(Menu.new("vegetarians",4))
+    m.addRestaurant(r)
+    
+    #Create and add a new restaurant
+    r = Restaurant.new("B",3,100)
+    r.addMenu(Menu.new("vegetarians",20))
+    r.addMenu(Menu.new("gluten free",20))
+    m.addRestaurant(r)
+
+    #Create an order
+    om = OrderMenu.new(50)
+    #Add special meals to the order
+    om.addMenu(Menu.new("vegetarians",5))
+    om.addMenu(Menu.new("gluten free",7))
+
+    #Get the result
+    res =  m.finder(om)
+    => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}} 
+
+
+### Processing a file
+
+The Module support json file definitions as:
+
+#### Sample of data structure defined on: ./tests/data/problem.js
+```
+{
+  "restaurants": [
+    {
+      "name": "A",
+      "rating": 5,
+      "meals_qty": 40,
+      "specials": [
+        { "vegetarians": 4  }
+      ]
+    },
+    {
+      "name": "B",
+      "rating": 3,
+      "meals_qty": 100,
+      "specials":[
+        { "vegetarians": 20 },
+        { "gluten free": 20 }
+      ]
+    }
+  ],
+  "order": {
+    "quantity": 50,
+    "specials": [
+      { "vegetarians": 5 },
+      { "gluten free": 7 }
+    ]
+  }
+}
+```
+#### Processing the file (on the console)
+
+    #Create a MealFinder
+    m = MealFinder.new
+    
+    #Process a json file
+    res = m.process_file("tests/data/problem.js")
+    => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}} 
