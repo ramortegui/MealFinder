@@ -14,9 +14,8 @@ Restaurant B has a rating of 3/5 and can serve 100 meals including 20 vegetarian
 
 Expected meal orders: Restaurant A (4 vegetarian + 36 others), Restaurant B (1 vegetarian + 7 gluten free + 2 others)
 
-## Asumptions
+## Assumptions
 
-- The user has ruby installed
 - The rating of each restaurant is an integer.
 - The total meals of the restaurants are enough to satisfy the team's order.
 
