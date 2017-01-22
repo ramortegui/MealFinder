@@ -85,4 +85,15 @@ class MealFinder
 
   end
 
+  def print_result(result)
+    puts "The result of the meal finder is: "
+    result.keys.each do |restaurant|
+      puts "Restaurant: #{restaurant}"
+      result[restaurant].keys.each do |menu|
+        puts "\t #{menu} #{result[restaurant][menu]}"
+      end
+    end
+    return
+  end
+
 end

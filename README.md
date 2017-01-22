@@ -46,12 +46,12 @@ Run console
 
     #Create a new meal finder
     m = MealFinder.new
-    
+
     #Create and add a new restaurant
     r = Restaurant.new("A",5,40)
     r.addMenu(Menu.new("vegetarians",4))
     m.addRestaurant(r)
-    
+
     #Create and add a new restaurant
     r = Restaurant.new("B",3,100)
     r.addMenu(Menu.new("vegetarians",20))
@@ -66,7 +66,20 @@ Run console
 
     #Get the result
     res =  m.finder(om)
-    => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}} 
+    => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}}
+
+    #to print the result
+    m.print_result(r)
+    The result of the meal finder is:
+    Restaurant: A
+      other 36
+      vegetarians 4
+    Restaurant: B
+      other 2
+      vegetarians 1
+      gluten free 7
+      => nil
+
 
 
 ### Processing a file
@@ -108,7 +121,20 @@ The Module support json file definitions as:
 
     #Create a MealFinder
     m = MealFinder.new
-    
+
     #Process a json file
     res = m.process_file("tests/data/problem.js")
     => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}} 
+
+    #to print the result
+    m.print_result(r)
+    The result of the meal finder is:
+    Restaurant: A
+      other 36
+      vegetarians 4
+    Restaurant: B
+      other 2
+      vegetarians 1
+      gluten free 7
+      => nil
+
