@@ -69,7 +69,7 @@ Run console
     => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}}
 
     #to print the result
-    m.print_result(r)
+    m.print_result(res)
     The result of the meal finder is:
     Restaurant: A
       other 36
@@ -127,7 +127,7 @@ The Module supports json file definitions as:
     => {"A"=>{"other"=>36, "vegetarians"=>4}, "B"=>{"other"=>2, "vegetarians"=>1, "gluten free"=>7}} 
 
     #to print the result
-    m.print_result(r)
+    m.print_result(res)
     The result of the meal finder is:
     Restaurant: A
       other 36
